@@ -17,4 +17,4 @@ This is a tool to send out common messages to many slack channels at once.
  
  2) Open `index.html` in your favorite browser
  3) Enter your message
- 4) click Submit Query and you message should be sent to all the channels
+ 4) click `Submit Query` and you message should be sent to all the channels
