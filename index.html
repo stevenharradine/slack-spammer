@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Slack Spammer</title>
+		<script>
+			slacktoken = "REDACT/REDACT/REDACT"
+			var channels = []
+			channels.push ("@person")
+			channels.push ("#general")
+			channels.push ("#announcements")
+		</script>
+	</head>
+	<body>
+		<script>
+			document.write ("<h2>Channels</h2><ul>")
+			for (var i = 0, len = channels.length; i < len; i++) {
+				document.write ("<li>" + channels[i] + "</li>")
+			}
+			document.write ("</ul>")
+			document.write ("<h2>Message</h2>")
+			document.write ("<form><label for='msg'>Message:</label><textarea id='msg'></textarea><input type='submit' /></form>")
+			document.getElementsByTagName("form")[0].addEventListener ("submit", function (e) {
+				e.preventDefault()
+				message = document.getElementsByTagName("textarea")[0].value
+
+				for (var i = 0, len = channels.length; i < len; i++) {
+					var channel = channels[i]
+
+					var xhr = new XMLHttpRequest()
+					xhr.open('POST', 'https://hooks.slack.com/services/' + slacktoken, true)
+
+					//Send the proper header information along with the request
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+
+					payload="payload={\"channel\": \"" + channel + "\", \"username\": \"webhookbot\", \"text\": \"" + message + "\", \"icon_emoji\": \":ghost:\"}"
+					xhr.send(payload)
+				}
+			})
+		</script>
+	</body>
+</html>
